@@ -6,7 +6,7 @@ let amplitude; // get the amplitude level (between 0 and 1.0)
 let audioPlayed = false;
 
 // the value we will modify with sound
-let lineSize = 0;
+let distance = 0;
 let rotation = 0;
 let hueValue = 0;
 
@@ -42,15 +42,16 @@ function draw() {
     hueValue = (hueValue + 0.1) % 360; // increment hueValue with each drawing loop iteration and wrap it around at 360
 
     // get our line size
-    lineSize = map(level, 0.08, 0.2, 0, width * 0.8);
-    lineSize = constrain(lineSize, 0, width * 0.8);
+    distance = map(level, 0.08, 0.2, 0, width * 0.8);
+    distance = constrain(distance, 0, width * 0.8);
 
     // line reacting to audio
     stroke(hueValue, 100, 100);
+    strokeWeight(4);
     push();
     translate(width / 2, height / 2);
     rotate(radians(rotation));
-    line(0, 0, 0, -lineSize);
+    ellipse(0, -distance, 20);
     pop();
 
     // rotate
